@@ -1,0 +1,21 @@
+version: '3.2'
+services:
+  rails:
+    build: number_generator_app/
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+      - source: ./number_generator_app/
+      - target: /rails_app
+
+  angular:
+    build: number-generator-service/
+    command: ng serve --host 0.0.0.0
+    ports:
+      - "4200:4200"
+    volumes:
+      - type: bind
+        source: ./number-generator-service/
+        target: /angular
